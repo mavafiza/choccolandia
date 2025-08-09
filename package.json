@@ -1,0 +1,27 @@
+{
+  "name": "chocolandia",
+  "version": "1.0.0",
+  "description": "Landing page para un emprendimiento familiar de chocotejas, bombonería y postres artesanales ubicado en Mercado Lima, Perú.",
+  "main": "index.js",
+  "scripts": {
+    "build": "postcss css/style.postcss -o css/style.css",
+    "watch": "postcss css/style.postcss -o css/style.css --watch",
+    "test": "echo \"No test specified\""
+  },
+  "keywords": [
+    "artesanal",
+    "chocotejas",
+    "bomboneria",
+    "lima",
+    "peru",
+    "emprendimiento"
+  ],
+  "author": "Tu Nombre",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "cssnano": "^7.1.0",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1"
+  }
+}

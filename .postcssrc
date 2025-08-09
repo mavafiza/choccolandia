@@ -1,0 +1,5 @@
+{
+  "use": ["autoprefixer", "cssnano"],
+  "input": "css/style.postcss",
+  "output": "css/style.css"
+}
