@@ -1,0 +1,18 @@
+# Carpetas
+node_modules/
+.cache/
+dist/
+build/
+
+# Archivos de desarrollo
+.env
+*.log
+npm-debug.log*
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# CSS generado (opcional, si usas build)
+css/style.css
+!css/style.css  # Descomenta si SÍ quieres subir el CSS
