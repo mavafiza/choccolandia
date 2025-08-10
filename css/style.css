@@ -1,4 +1,4 @@
-/* style.postcss */
+/* style.css - Versión completa, responsive y con menú deslizante */
 :root {
   --chocolate-oscuro: #4B2E2A;
   --cacao: #8B5A44;
@@ -6,6 +6,7 @@
   --rosa-tierra: #D4A59A;
   --dorado: #C6A961;
   --blanco: #FFFFFF;
+  --sombra: rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -19,13 +20,14 @@ body {
   background-color: var(--crema);
   color: var(--chocolate-oscuro);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 .container {
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0 15px;
 }
 
 /* HEADER */
@@ -35,10 +37,10 @@ body {
   padding: 15px 0;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
 }
 
-.header .container {
+.header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -51,22 +53,49 @@ body {
 }
 
 .logo img {
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
 }
 
 .logo h1 {
   font-family: 'Bubblegum Sans', cursive;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: var(--dorado);
+  margin: 0;
+}
+
+/* Menú hamburguesa */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 1001;
+}
+
+.menu-toggle span {
+  width: 28px;
+  height: 3px;
+  background-color: var(--crema);
+  margin: 3px 0;
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+/* Menú desktop */
+.nav {
+  display: flex;
+  gap: 25px;
 }
 
 .nav a {
   color: var(--crema);
-  margin-left: 20px;
   text-decoration: none;
   font-weight: 500;
+  font-family: 'Poppins', sans-serif;
   transition: color 0.3s;
 }
 
@@ -74,25 +103,62 @@ body {
   color: var(--dorado);
 }
 
+/* Menú mobile (deslizante) */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background-color: var(--chocolate-oscuro);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    transition: right 0.4s ease;
+    z-index: 999;
+    padding: 60px 0;
+  }
+
+  .nav.active {
+    right: 0;
+  }
+
+  .nav a {
+    font-size: 1.2rem;
+    color: var(--crema);
+  }
+
+  .nav a:hover {
+    color: var(--dorado);
+  }
+}
+
 /* HERO */
 .hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/hero-bg.jpg');
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.pinimg.com/originals/8c/d1/aa/8cd1aa81f3c5c77456fd1c66b0b0787c.gif');
   background-size: cover;
   background-position: center;
   color: var(--blanco);
   text-align: center;
-  padding: 100px 20px;
+  padding: 120px 20px;
 }
 
 .hero-content h2 {
-  font-size: 2.5rem;
+  font-family: 'Bubblegum Sans', cursive;
+  font-size: 2.3rem;
   margin-bottom: 15px;
-  font-family: 'Bubblegum Sans', cursive;}
+}
 
 .hero-content p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-bottom: 20px;
-  max-width: 600px;
+  max-width: 500px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -103,14 +169,19 @@ body {
   padding: 12px 30px;
   border: none;
   border-radius: 30px;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   display: inline-block;
-  transition: background 0.3s;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .btn:hover {
   background-color: #b0964d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(198, 169, 97, 0.3);
 }
 
 /* GALERÍA */
@@ -128,8 +199,8 @@ body {
 
 .productos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
   margin-top: 20px;
 }
 
@@ -137,17 +208,17 @@ body {
   background: var(--blanco);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px var(--sombra);
   transition: transform 0.3s;
 }
 
 .producto:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
 }
 
 .producto img {
   width: 100%;
-  height: 200px;
+  height: 180px;
   object-fit: cover;
 }
 
@@ -155,6 +226,7 @@ body {
   margin: 15px 10px 8px;
   font-family: 'Bubblegum Sans', cursive;
   color: var(--cacao);
+  font-size: 1.2rem;
 }
 
 .producto p {
@@ -167,21 +239,22 @@ body {
 .encargo {
   background-color: var(--cacao);
   color: var(--blanco);
-  padding: 60px 0;
+  padding: 70px 0;
   text-align: center;
 }
 
 .encargo h2 {
   font-family: 'Bubblegum Sans', cursive;
-  font-size: 2rem;
+  font-size: 1.9rem;
   margin-bottom: 15px;
 }
 
 .encargo p {
   margin-bottom: 30px;
-  max-width: 600px;
+  max-width: 550px;
   margin-left: auto;
   margin-right: auto;
+  font-size: 1.05rem;
 }
 
 .form-encargo {
@@ -198,6 +271,7 @@ body {
   border: none;
   border-radius: 8px;
   font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
 }
 
 .form-encargo button {
@@ -220,24 +294,27 @@ body {
   font-family: 'Bubblegum Sans', cursive;
   margin-bottom: 20px;
   color: var(--chocolate-oscuro);
+  font-size: 1.9rem;
 }
 
 .contact-info p {
-  margin-bottom: 10px;
-  font-size: 1.1rem;
+  margin-bottom: 12px;
+  font-size: 1.05rem;
 }
 
 .redes {
-  margin-top: 20px;
+  margin-top: 25px;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 25px;
 }
 
 .redes a {
   color: var(--dorado);
   font-weight: 600;
   text-decoration: none;
+  font-size: 1.1rem;
+  font-family: 'Poppins', sans-serif;
 }
 
 .redes a:hover {
@@ -253,22 +330,82 @@ body {
   font-size: 0.9rem;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .header .container {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .nav a {
-    margin: 0 10px;
-  }
-
+/* Ajustes móviles extra */
+@media (max-width: 480px) {
   .hero-content h2 {
     font-size: 2rem;
   }
 
-  .productos-grid {
-    grid-template-columns: 1fr;
+  .galeria h2,
+  .encargo h2,
+  .contact-info h2 {
+    font-size: 1.7rem;
+  }
+
+  .producto h3 {
+    font-size: 1.1rem;
+  }
+
+  .nav {
+    width: 85%;
   }
 }
+
+
+
+/* ····························· */
+
+/* Botón de WhatsApp */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25D366; /* Verde oficial de WhatsApp */
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
+  z-index: 1000;
+  text-decoration: none;
+  animation: float 2s ease-in-out infinite;
+}
+
+.whatsapp-btn i {
+  pointer-events: none;
+}
+
+.whatsapp-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(37, 211, 102, 0.5);
+}
+
+/* Animación suave de "flotar" */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Responsive: tamaño más pequeño en móviles */
+@media (max-width: 480px) {
+  .whatsapp-btn {
+    width: 50px;
+    height: 50px;
+    bottom: 15px;
+    right: 15px;
+    font-size: 24px;
+  }
+}
+/* ····························· */
