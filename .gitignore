@@ -8,6 +8,7 @@ build/
 .env
 *.log
 npm-debug.log*
+.yarn-integrity
 
 # Sistema
 .DS_Store
@@ -16,3 +17,4 @@ Thumbs.db
 # CSS generado (opcional, si usas build)
 css/style.css
 !css/style.css  # Descomenta si SÍ quieres subir el CSS
+.postcssrc
